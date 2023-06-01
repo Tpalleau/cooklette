@@ -9,28 +9,28 @@
         android:id="@+id/mainFragment"
         android:name="com.example.cooklette.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_AFragment"
-            app:destination="@id/AFragment" />
+            app:destination="@id/fragment_a" />
         <action
             android:id="@+id/action_mainFragment_to_BFragment"
-            app:destination="@id/BFragment" />
+            app:destination="@id/fragment_b" />
     </fragment>
     <fragment
-        android:id="@+id/AFragment"
+        android:id="@+id/fragment_a"
         android:name="com.example.cooklette.AFragment"
         android:label="fragment_a"
-        tools:layout="@layout/fragment_a" >
+        tools:layout="@layout/fragment_a">
         <action
             android:id="@+id/action_AFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
     <fragment
-        android:id="@+id/BFragment"
+        android:id="@+id/fragment_b"
         android:name="com.example.cooklette.BFragment"
         android:label="fragment_b"
-        tools:layout="@layout/fragment_b" >
+        tools:layout="@layout/fragment_b">
         <action
             android:id="@+id/action_BFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
