@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graphe"
+    android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
 
     <fragment
@@ -14,7 +14,10 @@
             android:id="@+id/action_mainFragment_to_AFragment"
             app:destination="@id/fragment_a" />
         <action
-            android:id="@+id/action_mainFragment_to_BFragment"
+            android:id="@+id/action_mainFragment_to_ingredientFragment"
+            app:destination="@id/ingredientFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_fragment_b"
             app:destination="@id/fragment_b" />
     </fragment>
     <fragment
@@ -35,4 +38,8 @@
             android:id="@+id/action_BFragment_to_mainFragment"
             app:destination="@id/mainFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/ingredientFragment"
+        android:name="IngredientFragment"
+        android:label="IngredientFragment" />
 </navigation>

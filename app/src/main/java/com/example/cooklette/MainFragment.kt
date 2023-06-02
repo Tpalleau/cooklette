@@ -27,7 +27,7 @@ class MainFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.buttonB).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_BFragment)
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_ingredientFragment)
         }
     }
 
