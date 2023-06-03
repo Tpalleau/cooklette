@@ -22,11 +22,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <include
+            android:id="@+id/photoSection"
+            layout="@layout/photo_section"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/getRecipyName" />
+
         <com.google.android.material.divider.MaterialDivider
             android:id="@+id/seperator1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/getRecipyName" />
+            app:layout_constraintTop_toBottomOf="@+id/photoSection" />
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputEditText"
