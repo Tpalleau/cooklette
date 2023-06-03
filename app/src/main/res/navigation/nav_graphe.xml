@@ -11,23 +11,11 @@
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
-            android:id="@+id/action_mainFragment_to_AFragment"
-            app:destination="@id/fragment_a" />
-        <action
             android:id="@+id/action_mainFragment_to_ingredientFragment"
             app:destination="@id/ingredientFragment" />
         <action
             android:id="@+id/action_mainFragment_to_fragment_b"
             app:destination="@id/fragment_b" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragment_a"
-        android:name="com.example.cooklette.AFragment"
-        android:label="fragment_a"
-        tools:layout="@layout/fragment_a">
-        <action
-            android:id="@+id/action_AFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragment_b"

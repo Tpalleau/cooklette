@@ -23,11 +23,11 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.buttonA).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_AFragment)
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_ingredientFragment)
         }
 
         view.findViewById<Button>(R.id.buttonB).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_ingredientFragment)
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_fragment_b)
         }
     }
 
