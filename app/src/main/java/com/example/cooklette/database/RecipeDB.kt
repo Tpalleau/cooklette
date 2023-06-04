@@ -12,7 +12,8 @@ import com.example.cooklette.database.entity.Unit
 
 @Database(entities = [Recipe::class, Ingredient::class, Unit::class, RecipeIngredient::class], version = 2, exportSchema = false)
 abstract class RecipeDB: RoomDatabase() {
-    abstract fun recipeDao(): RecipeDao
+
+    abstract val recipeDao: RecipeDao
 
     companion object{
         @Volatile

@@ -80,6 +80,25 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="16dp" />
 
+        <EditText
+            android:id="@+id/getInstructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="recipe instructions"
+            android:inputType="textMultiLine"
+            app:layout_constraintTop_toBottomOf="@id/buttonAddIngredient"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="save"
+            app:layout_constraintTop_toBottomOf="@id/getInstructions"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

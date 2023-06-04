@@ -5,7 +5,7 @@
     android:orientation="horizontal">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editIngredientName"
+        android:id="@+id/getIngredientName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -14,7 +14,7 @@
         android:minHeight="48dp" />
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/editIngredientQuantity"
+        android:id="@+id/getIngredientQuantity"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
