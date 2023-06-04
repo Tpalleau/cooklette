@@ -6,14 +6,17 @@ import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.cooklette.MainActivity
+import com.example.cooklette.R
 import com.example.cooklette.database.dao.RecipeDao
 import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
 import com.example.cooklette.database.entity.RecipeIngredient
+import com.example.cooklette.database.entity.Unit
 import com.example.cooklette.databinding.FragmentAddBinding
 import com.example.cooklette.databinding.IngredientRowBinding
 import kotlinx.coroutines.launch
@@ -77,13 +80,13 @@ class IngredientFragment : Fragment() {
                     val id_recipe:Long = dao.insertRecipe(Recipe(name = title, instructions = instruction))
                     var id_ingredient: Long = 0
                     var quantity : Long = 0
-                    d("info", "ingredient $ingredientList, ${ingredientList.size}")
+                    d("MyInfo", "ingredient $ingredientList, ${ingredientList.size}")
                     for (i: Int in 0 until ingredientList.size){
-                        d("info", "for loop i=$i")
+                        d("MyInfo", "for loop i=$i")
                         id_ingredient = dao.insertIngredient(Ingredient(ingredient = ingredientList[i].first))
                         quantity = ingredientList[i].second
-                        d("info", "id ingredient $id_ingredient id recipe $id_recipe")
-                        dao.insertRecipeIngredient(RecipeIngredient(id_ingredient = id_ingredient, id_recipe = id_recipe, id_unit = 0, quantity = quantity))
+                        d("MyInfo", "id ingredient $id_ingredient id recipe $id_recipe")
+                        dao.insertRecipeIngredient(RecipeIngredient(id_ingredient = id_ingredient, id_recipe = id_recipe, id_unit = "g", quantity = quantity))
                     }
                 }
             }
@@ -91,15 +94,24 @@ class IngredientFragment : Fragment() {
     }
 
     private fun addIngredientRow() {
-        val rowBinding =
-            IngredientRowBinding.inflate(layoutInflater, binding.containerIngredients, true)
-
+        val rowBinding = IngredientRowBinding.inflate(layoutInflater, binding.containerIngredients, true)
         rowBindings.add(rowBinding)
+
+        var units: List<Unit> = emptyList()
+        lifecycleScope.launch {
+            units = dao.getAllUnits()
+
+            val unitStrings = units.map { it.unit }
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, unitStrings)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            rowBinding.getUnit.adapter = adapter
+        }
 
         rowBinding.buttonRemoveIngredient.setOnClickListener {
             binding.containerIngredients.removeView(rowBinding.root)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

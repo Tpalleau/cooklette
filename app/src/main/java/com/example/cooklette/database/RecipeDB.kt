@@ -10,7 +10,7 @@ import com.example.cooklette.database.entity.Recipe
 import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.Unit
 
-@Database(entities = [Recipe::class, Ingredient::class, Unit::class, RecipeIngredient::class], version = 2, exportSchema = false)
+@Database(entities = [Recipe::class, Ingredient::class, Unit::class, RecipeIngredient::class], version = 1, exportSchema = false)
 abstract class RecipeDB: RoomDatabase() {
 
     abstract val recipeDao: RecipeDao

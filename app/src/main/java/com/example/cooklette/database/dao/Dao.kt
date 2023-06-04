@@ -35,8 +35,14 @@ interface RecipeDao {
     suspend fun insertIngredient(ingredient: Ingredient) : Long
 
     // UNIT
-    @Query("SELECT * FROM Unit WHERE id_unit=:id")
-    suspend fun getUnit(id: Int): Unit
+    @Query("SELECT * FROM unit")
+    suspend fun getAllUnits(): List<Unit>
+
+    @Query("SELECT * FROM Unit WHERE unit=:unit")
+    suspend fun getUnit(unit: String): Unit
+
+    @Insert
+    suspend fun insertUnit(unit: Unit)
 
     //Recipe_Ingredient
     @Query("SELECT * FROM RecipeIngredient")

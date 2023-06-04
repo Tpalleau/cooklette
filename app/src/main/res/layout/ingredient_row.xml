@@ -22,10 +22,19 @@
         android:inputType="number"
         android:minHeight="48dp" />
 
+    <Spinner
+        android:id="@+id/getUnit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:minHeight="48dp" />
+
     <Button
         android:id="@+id/buttonRemoveIngredient"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Remove" />
+
+
 
 </LinearLayout>

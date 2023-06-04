@@ -12,7 +12,7 @@ data class RecipeIngredient(
     @ColumnInfo(index = true)
     val id_ingredient: Long,
     @NonNull
-    val id_unit: Long,
+    val id_unit: String,
     @NonNull
     val quantity: Long
 )
