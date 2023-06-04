@@ -21,20 +21,29 @@ interface RecipeDao {
     @Query("SELECT * FROM Recipe")
     suspend fun getAllRecipe(): List<Recipe>
 
-    @Insert
-    suspend fun insertRecipe(recipe: Recipe)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertRecipe(recipe: Recipe): Long
 
     // Ingredients
+    @Query("SELECT * FROM ingredient")
+    suspend fun getAllIngredients(): List<Ingredient>
+
     @Query("SELECT * FROM Ingredient WHERE id_ingredient=:id")
     suspend fun getIngredient(id: Int): Ingredient
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertIngredient(ingredient: Ingredient) : Long
 
     // UNIT
     @Query("SELECT * FROM Unit WHERE id_unit=:id")
     suspend fun getUnit(id: Int): Unit
 
     //Recipe_Ingredient
+    @Query("SELECT * FROM RecipeIngredient")
+    suspend fun getAllIds(): RecipeIngredient
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipeIngredient(crossRef: RecipeIngredient)
+    suspend fun insertRecipeIngredient(crossRef: RecipeIngredient): Long
 
     @Transaction
     @Query("SELECT * FROM Recipe WHERE id_recipe=:id_recipe")

@@ -17,12 +17,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         dao = RecipeDB.getInstance(this).recipeDao
-
-
-        lifecycleScope.launch{
-            val all_recipe = dao.getAllRecipe()
-            d("mytest", "this is the recipe list\n$all_recipe")
-        }
     }
 
     fun getDao(): RecipeDao{

@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.cooklette.MainActivity
 import com.example.cooklette.database.dao.RecipeDao
+import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
 import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.databinding.FragmentAddBinding
@@ -23,7 +23,7 @@ class IngredientFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var dao: RecipeDao
 
-    private val ingredientList = mutableListOf<Pair<String, Int>>()
+    private val ingredientList = mutableListOf<Pair<String, Long>>()
     private val rowBindings = mutableListOf<IngredientRowBinding>()
 
     override fun onCreateView(
@@ -54,7 +54,7 @@ class IngredientFragment : Fragment() {
 
             rowBindings.forEach{
                 val ingredientName = it.getIngredientName.text.toString()
-                val ingredientQuantity = it.getIngredientQuantity.text.toString().toInt()
+                val ingredientQuantity = it.getIngredientQuantity.text.toString().toLong()
                 ingredientList.add(ingredientName to ingredientQuantity)
 
             }
@@ -71,9 +71,20 @@ class IngredientFragment : Fragment() {
                 Toast.makeText(context, "Recipe Added", Toast.LENGTH_SHORT).show()
 
 
+
                 // add values to db
                 lifecycleScope.launch{
-                    dao.insertRecipe(Recipe(name = title, instructions = instruction))
+                    val id_recipe:Long = dao.insertRecipe(Recipe(name = title, instructions = instruction))
+                    var id_ingredient: Long = 0
+                    var quantity : Long = 0
+                    d("info", "ingredient $ingredientList, ${ingredientList.size}")
+                    for (i: Int in 0 until ingredientList.size){
+                        d("info", "for loop i=$i")
+                        id_ingredient = dao.insertIngredient(Ingredient(ingredient = ingredientList[i].first))
+                        quantity = ingredientList[i].second
+                        d("info", "id ingredient $id_ingredient id recipe $id_recipe")
+                        dao.insertRecipeIngredient(RecipeIngredient(id_ingredient = id_ingredient, id_recipe = id_recipe, id_unit = 0, quantity = quantity))
+                    }
                 }
             }
         }

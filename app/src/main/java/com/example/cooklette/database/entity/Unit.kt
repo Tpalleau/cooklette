@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity
 data class Unit (
     @PrimaryKey(autoGenerate = true)
-    val id_unit: Int=0,
+    val id_unit: Long=0,
     val unit: String
         )
