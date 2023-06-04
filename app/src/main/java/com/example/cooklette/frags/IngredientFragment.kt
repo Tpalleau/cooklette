@@ -1,3 +1,5 @@
+package com.example.cooklette.frags
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +29,8 @@ class IngredientFragment : Fragment() {
     }
 
     private fun addIngredientRow() {
-        val rowBinding = IngredientRowBinding.inflate(layoutInflater, binding.containerIngredients, true)
+        val rowBinding =
+            IngredientRowBinding.inflate(layoutInflater, binding.containerIngredients, true)
 
         rowBinding.buttonRemoveIngredient.setOnClickListener {
             binding.containerIngredients.removeView(rowBinding.root)

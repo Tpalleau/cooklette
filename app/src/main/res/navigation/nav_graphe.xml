@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.example.cooklette.MainFragment"
+        android:name="com.example.cooklette.frags.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main">
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_b"
-        android:name="com.example.cooklette.BFragment"
+        android:name="com.example.cooklette.frags.BFragment"
         android:label="fragment_b"
         tools:layout="@layout/fragment_b">
         <action
@@ -28,6 +28,6 @@
     </fragment>
     <fragment
         android:id="@+id/ingredientFragment"
-        android:name="IngredientFragment"
+        android:name="com.example.cooklette.frags.IngredientFragment"
         android:label="IngredientFragment" />
 </navigation>

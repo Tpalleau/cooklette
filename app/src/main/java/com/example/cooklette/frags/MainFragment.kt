@@ -1,12 +1,13 @@
-package com.example.cooklette
+package com.example.cooklette.frags
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.cooklette.R
 
 class MainFragment : Fragment() {
 
@@ -23,7 +24,8 @@ class MainFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<Button>(R.id.buttonA).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_ingredientFragment)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_mainFragment_to_ingredientFragment)
         }
 
         view.findViewById<Button>(R.id.buttonB).setOnClickListener {
