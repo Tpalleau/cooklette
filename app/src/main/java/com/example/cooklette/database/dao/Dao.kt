@@ -7,7 +7,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
-import com.example.cooklette.database.entity.Recipe_Ingredient
+import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.Unit
 import com.example.cooklette.database.entity.relations.IngredientWithRecipe
 import com.example.cooklette.database.entity.relations.RecipeWithIngredient
@@ -15,7 +15,7 @@ import com.example.cooklette.database.entity.relations.RecipeWithIngredient
 @Dao
 interface RecipeDao {
     // Recipe
-    @Query("SELECT * FROM Recipe WHERE id=:id ")
+    @Query("SELECT * FROM Recipe WHERE id_recipe=:id ")
     suspend fun getAllRecipeInfo(id: Int): Recipe
 
     @Query("SELECT * FROM Recipe")
@@ -25,27 +25,24 @@ interface RecipeDao {
     suspend fun insertRecipe(recipe: Recipe)
 
     // Ingredients
-    @Query("SELECT * FROM Ingredient WHERE id=:id")
+    @Query("SELECT * FROM Ingredient WHERE id_ingredient=:id")
     suspend fun getIngredient(id: Int): Ingredient
 
     // UNIT
-    @Query("SELECT * FROM Unit WHERE id=:id")
+    @Query("SELECT * FROM Unit WHERE id_unit=:id")
     suspend fun getUnit(id: Int): Unit
 
     //Recipe_Ingredient
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipeIngredient(crossRef: Recipe_Ingredient)
+    suspend fun insertRecipeIngredient(crossRef: RecipeIngredient)
 
-    /*
     @Transaction
-    @Query("SELECT * FROM Recipe WHERE id=:id_recipe")
+    @Query("SELECT * FROM Recipe WHERE id_recipe=:id_recipe")
     suspend fun getIngredientOfRecipe(id_recipe: Int): List<RecipeWithIngredient>
 
-     */
-
-    /*@Transaction
-    @Query("SELECT * FROM Ingredient WHERE id=:id_ingredient")
+    @Transaction
+    @Query("SELECT * FROM Ingredient WHERE id_ingredient=:id_ingredient")
     suspend fun getRecipeOfIngredient(id_ingredient: Int): List<IngredientWithRecipe>
 
-     */
+
 }

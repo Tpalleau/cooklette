@@ -7,10 +7,10 @@ import androidx.room.RoomDatabase
 import com.example.cooklette.database.dao.RecipeDao
 import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
-import com.example.cooklette.database.entity.Recipe_Ingredient
+import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.Unit
 
-@Database(entities = [Recipe::class, Ingredient::class, Unit::class, Recipe_Ingredient::class], version = 2, exportSchema = false)
+@Database(entities = [Recipe::class, Ingredient::class, Unit::class, RecipeIngredient::class], version = 2, exportSchema = false)
 abstract class RecipeDB: RoomDatabase() {
     abstract fun recipeDao(): RecipeDao
 
