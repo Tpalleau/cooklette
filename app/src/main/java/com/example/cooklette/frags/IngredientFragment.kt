@@ -26,7 +26,7 @@ class IngredientFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var dao: RecipeDao
 
-    private val ingredientList = mutableListOf<Pair<String, Long>>()
+    private val ingredientList = mutableListOf<Triple<String, Long, String>>()
     private val rowBindings = mutableListOf<IngredientRowBinding>()
 
     override fun onCreateView(
@@ -58,7 +58,8 @@ class IngredientFragment : Fragment() {
             rowBindings.forEach{
                 val ingredientName = it.getIngredientName.text.toString()
                 val ingredientQuantity = it.getIngredientQuantity.text.toString().toLong()
-                ingredientList.add(ingredientName to ingredientQuantity)
+                val ingredientUnit: String = it.getUnit.selectedItem as String
+                ingredientList.add(Triple(ingredientName, ingredientQuantity, ingredientUnit))
 
             }
 
@@ -80,13 +81,16 @@ class IngredientFragment : Fragment() {
                     val id_recipe:Long = dao.insertRecipe(Recipe(name = title, instructions = instruction))
                     var id_ingredient: Long = 0
                     var quantity : Long = 0
+                    var unit: String = ""
                     d("MyInfo", "ingredient $ingredientList, ${ingredientList.size}")
                     for (i: Int in 0 until ingredientList.size){
                         d("MyInfo", "for loop i=$i")
                         id_ingredient = dao.insertIngredient(Ingredient(ingredient = ingredientList[i].first))
                         quantity = ingredientList[i].second
+                        unit = ingredientList[i].third
+
                         d("MyInfo", "id ingredient $id_ingredient id recipe $id_recipe")
-                        dao.insertRecipeIngredient(RecipeIngredient(id_ingredient = id_ingredient, id_recipe = id_recipe, id_unit = "g", quantity = quantity))
+                        dao.insertRecipeIngredient(RecipeIngredient(id_ingredient = id_ingredient, id_recipe = id_recipe, id_unit = unit, quantity = quantity))
                     }
                 }
             }
