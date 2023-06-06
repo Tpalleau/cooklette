@@ -29,7 +29,7 @@ class MainFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.buttonB).setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_fragment_b)
+            Navigation.findNavController(view).navigate(R.id.action_mainFragment_to_savedFragment)
         }
     }
 
