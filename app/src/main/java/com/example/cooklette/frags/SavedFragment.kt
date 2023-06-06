@@ -12,10 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cooklette.MainActivity
 import com.example.cooklette.R
+import com.example.cooklette.RecipeAdapter
 import com.example.cooklette.database.dao.RecipeDao
 import com.example.cooklette.database.entity.Recipe
 import com.example.cooklette.database.entity.RecipeIngredient
-import com.example.cooklette.frags.adapter.IngredientRowAdapter
+import com.example.cooklette.database.entity.RecipeWithIngredients
 import kotlinx.coroutines.launch
 
 class SavedFragment : Fragment() {
@@ -32,10 +33,10 @@ class SavedFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
 
-        var data: List<Recipe>
+        var data: List<RecipeWithIngredients>
         lifecycleScope.launch{
-            data = dao.getAllRecipies()
-            val adapter = IngredientRowAdapter(data)
+            data = dao.getAllRecipeWithIngredients()
+            val adapter = RecipeAdapter(data)
             recyclerView.adapter = adapter
         }
 

@@ -1,0 +1,53 @@
+<!-- recipe_item.xml -->
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Title -->
+    <LinearLayout
+        android:id="@+id/layoutRecipeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/recipeName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/ivExpandCollapse"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_expand_more" />
+    </LinearLayout>
+
+    <!-- Ingredients List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:visibility="gone"/>
+
+    <!-- Button to navigate to another fragment -->
+    <Button
+        android:id="@+id/btnSeeRecipe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="See Full Recipe"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:padding="8dp"/>
+
+</LinearLayout>
