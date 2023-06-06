@@ -13,8 +13,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.cooklette.MainActivity
 import com.example.cooklette.R
 import com.example.cooklette.database.dao.RecipeDao
+import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
-import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.Unit
 import com.example.cooklette.databinding.FragmentAddBinding
 import com.example.cooklette.databinding.IngredientRowBinding
@@ -82,7 +82,7 @@ class IngredientFragment : Fragment() {
                     d("MyInfo", "ingredientList $ingredientList, ${ingredientList.size}")
                     for (i: Int in 0 until ingredientList.size){
                         dao.insertRecipeIngredient(
-                            RecipeIngredient(
+                            Ingredient(
                                 id_recipe = idRecipe,
                                 ingredient = ingredientList[i].first,
                                 quantity = ingredientList[i].second,

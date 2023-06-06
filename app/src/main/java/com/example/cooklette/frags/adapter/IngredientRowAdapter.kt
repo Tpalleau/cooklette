@@ -11,7 +11,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cooklette.database.entity.RecipeIngredient
+import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.RecipeWithIngredients
 
 class RecipeAdapter(private val items: List<RecipeWithIngredients>) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
@@ -61,7 +61,7 @@ class RecipeAdapter(private val items: List<RecipeWithIngredients>) : RecyclerVi
     }
 
     // RecyclerViewAdapter for the ingredients list
-    class IngredientsAdapter(private val ingredients: List<RecipeIngredient>) :
+    class IngredientsAdapter(private val ingredients: List<Ingredient>) :
         RecyclerView.Adapter<IngredientsAdapter.IngredientViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {

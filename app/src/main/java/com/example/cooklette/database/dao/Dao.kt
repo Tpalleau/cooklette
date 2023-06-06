@@ -5,8 +5,8 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
-import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.RecipeWithIngredients
 import com.example.cooklette.database.entity.Unit
 
@@ -33,11 +33,11 @@ interface RecipeDao {
     suspend fun insertUnit(unit: Unit)
 
     //Recipe_Ingredient
-    @Query("SELECT * FROM RecipeIngredient")
-    suspend fun getAllIds(): RecipeIngredient
+    @Query("SELECT * FROM Ingredient")
+    suspend fun getAllIds(): Ingredient
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecipeIngredient(crossRef: RecipeIngredient): Long
+    suspend fun insertRecipeIngredient(crossRef: Ingredient): Long
 
     @Transaction
     @Query("SELECT * FROM Recipe WHERE id_recipe = :id_recipe")

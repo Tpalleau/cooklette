@@ -9,5 +9,5 @@ data class RecipeWithIngredients (
         parentColumn = "id_recipe",
         entityColumn = "id_recipe"
     )
-    val ingredients: List<RecipeIngredient>
+    val ingredients: List<Ingredient>
 )

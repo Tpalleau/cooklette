@@ -2,7 +2,6 @@ package com.example.cooklette.frags
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,6 @@ import com.example.cooklette.MainActivity
 import com.example.cooklette.R
 import com.example.cooklette.RecipeAdapter
 import com.example.cooklette.database.dao.RecipeDao
-import com.example.cooklette.database.entity.Recipe
-import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.RecipeWithIngredients
 import kotlinx.coroutines.launch
 
