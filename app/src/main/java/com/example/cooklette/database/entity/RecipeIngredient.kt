@@ -4,15 +4,11 @@ import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 
-@Entity(primaryKeys = ["id_recipe", "id_ingredient"])
+@Entity(primaryKeys = ["id_recipe", "ingredient"])
 data class RecipeIngredient(
     @NonNull
     val id_recipe: Long,
-    @NonNull
-    @ColumnInfo(index = true)
-    val id_ingredient: Long,
-    @NonNull
-    val id_unit: String,
-    @NonNull
+    val ingredient: String,
+    val unit: String,
     val quantity: Long
 )

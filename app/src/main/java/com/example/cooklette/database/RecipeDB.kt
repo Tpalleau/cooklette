@@ -5,12 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.example.cooklette.database.dao.RecipeDao
-import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
 import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.Unit
 
-@Database(entities = [Recipe::class, Ingredient::class, Unit::class, RecipeIngredient::class], version = 1, exportSchema = false)
+@Database(entities = [RecipeIngredient::class, Recipe::class, Unit::class], version = 2, exportSchema = false)
 abstract class RecipeDB: RoomDatabase() {
 
     abstract val recipeDao: RecipeDao
@@ -25,6 +24,7 @@ abstract class RecipeDB: RoomDatabase() {
                     context.applicationContext,
                     RecipeDB::class.java,
                 "recipe_db"
+                ).fallbackToDestructiveMigration(
                 ).build().also {
                     INSTANCE = it
                 }

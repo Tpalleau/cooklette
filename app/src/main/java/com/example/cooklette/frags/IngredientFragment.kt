@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import com.example.cooklette.MainActivity
 import com.example.cooklette.R
 import com.example.cooklette.database.dao.RecipeDao
-import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.Recipe
 import com.example.cooklette.database.entity.RecipeIngredient
 import com.example.cooklette.database.entity.Unit
@@ -56,11 +55,11 @@ class IngredientFragment : Fragment() {
             d("nb_value", "val $nb_people")
 
             rowBindings.forEach{
-                val ingredientName = it.getIngredientName.text.toString()
-                val ingredientQuantity = it.getIngredientQuantity.text.toString().toLong()
-                val ingredientUnit: String = it.getUnit.selectedItem as String
-                ingredientList.add(Triple(ingredientName, ingredientQuantity, ingredientUnit))
-
+                // add values in each row to Triple List
+                ingredientList.add(Triple(
+                    it.getIngredientName.text.toString(),
+                    it.getIngredientQuantity.text.toString().toLong(),
+                    it.getUnit.selectedItem as String))
             }
 
             if (title == "") {
@@ -78,20 +77,21 @@ class IngredientFragment : Fragment() {
 
                 // add values to db
                 lifecycleScope.launch{
-                    val id_recipe:Long = dao.insertRecipe(Recipe(name = title, instructions = instruction))
-                    var id_ingredient: Long = 0
-                    var quantity : Long = 0
-                    var unit: String = ""
-                    d("MyInfo", "ingredient $ingredientList, ${ingredientList.size}")
-                    for (i: Int in 0 until ingredientList.size){
-                        d("MyInfo", "for loop i=$i")
-                        id_ingredient = dao.insertIngredient(Ingredient(ingredient = ingredientList[i].first))
-                        quantity = ingredientList[i].second
-                        unit = ingredientList[i].third
+                    val idRecipe:Long = dao.insertRecipe(Recipe(name = title, instructions = instruction, nb_people = nb_people.toInt()))
 
-                        d("MyInfo", "id ingredient $id_ingredient id recipe $id_recipe")
-                        dao.insertRecipeIngredient(RecipeIngredient(id_ingredient = id_ingredient, id_recipe = id_recipe, id_unit = unit, quantity = quantity))
+                    d("MyInfo", "ingredientList $ingredientList, ${ingredientList.size}")
+                    for (i: Int in 0 until ingredientList.size){
+                        dao.insertRecipeIngredient(
+                            RecipeIngredient(
+                                id_recipe = idRecipe,
+                                ingredient = ingredientList[i].first,
+                                quantity = ingredientList[i].second,
+                                unit = ingredientList[i].third
+                            )
+                        )
                     }
+                    ingredientList.clear()
+
                 }
             }
         }
@@ -101,7 +101,7 @@ class IngredientFragment : Fragment() {
         val rowBinding = IngredientRowBinding.inflate(layoutInflater, binding.containerIngredients, true)
         rowBindings.add(rowBinding)
 
-        var units: List<Unit> = emptyList()
+        var units: List<Unit>
         lifecycleScope.launch {
             units = dao.getAllUnits()
 
