@@ -55,7 +55,7 @@ class SavedFragment : Fragment() {
 
         toolbar.findViewById<ImageButton>(R.id.imageButtonAdd).setOnClickListener{
             Navigation.findNavController(view)
-                .navigate(R.id.action_savedFragment_to_ingredientFragment)
+                .navigate(R.id.action_savedFragment_to_addFragment)
         }
 
         // Customize the toolbar buttons or views based on the fragment
