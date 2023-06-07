@@ -1,104 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        layout="@layout/toolbar_add"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:layout_height="wrap_content" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/getRecipyName"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="random"
-            android:ems="10"
-            android:hint="recipy name"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:padding="16dp">
 
-        <include
-            android:id="@+id/photoSection"
-            layout="@layout/photo_section"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/getRecipyName" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/getRecipyName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:autofillHints="random"
+                android:ems="10"
+                android:hint="recipy name"
+                android:inputType="text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/seperator1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/photoSection" />
+            <include
+                android:id="@+id/photoSection"
+                layout="@layout/photo_section"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/getRecipyName" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/getNbPeople"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="number of people"
-            android:inputType="number"
-            app:layout_constraintTop_toBottomOf="@+id/seperator1"
-            tools:layout_editor_absoluteX="16dp" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/seperator1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/photoSection" />
 
-        <com.google.android.material.divider.MaterialDivider
-            android:id="@+id/seperator2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/getRecipyName"
-            tools:layout_editor_absoluteX="16dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/getNbPeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="number of people"
+                android:inputType="number"
+                app:layout_constraintTop_toBottomOf="@+id/seperator1"
+                tools:layout_editor_absoluteX="16dp" />
 
-        <TextView
-            android:id="@+id/textviewIngredient"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ingredients"
-            app:layout_constraintTop_toBottomOf="@+id/getNbPeople"
-            tools:layout_editor_absoluteX="16dp" />
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/seperator2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/getRecipyName"
+                tools:layout_editor_absoluteX="16dp" />
 
-        <LinearLayout
-            android:id="@+id/containerIngredients"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@+id/textviewIngredient"
-            tools:layout_editor_absoluteX="16dp" />
+            <TextView
+                android:id="@+id/textviewIngredient"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingredients"
+                app:layout_constraintTop_toBottomOf="@+id/getNbPeople"
+                tools:layout_editor_absoluteX="16dp" />
 
-        <Button
-            android:id="@+id/buttonAddIngredient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add Ingredient"
-            app:layout_constraintTop_toBottomOf="@+id/containerIngredients"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp" />
+            <LinearLayout
+                android:id="@+id/containerIngredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@+id/textviewIngredient"
+                tools:layout_editor_absoluteX="16dp" />
 
-        <EditText
-            android:id="@+id/getInstructions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="recipe instructions"
-            android:inputType="textMultiLine"
-            app:layout_constraintTop_toBottomOf="@id/buttonAddIngredient"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            <Button
+                android:id="@+id/buttonAddIngredient"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Add Ingredient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerIngredients" />
 
-        <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="save"
-            app:layout_constraintTop_toBottomOf="@id/getInstructions"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            <EditText
+                android:id="@+id/getInstructions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="recipe instructions"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonAddIngredient" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <Button
+                android:id="@+id/buttonSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="save"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/getInstructions" />
 
-</ScrollView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</LinearLayout>

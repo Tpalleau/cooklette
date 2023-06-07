@@ -18,10 +18,10 @@ class MainActivity : AppCompatActivity() {
 
         dao = RecipeDB.getInstance(this).recipeDao
 
-        lifecycleScope.launch{
+        lifecycleScope.launch {
             val units = dao.getAllUnits()
             d("MyInfo", "unit values $units ${units.size}")
-            if (units.isEmpty()){
+            if (units.isEmpty()) {
                 d("MyInfo", "unit is null [+] adding values")
                 val unitList: List<String> = listOf(
                     "g",
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getDao(): RecipeDao{
+    fun getDao(): RecipeDao {
         return dao
     }
 }

@@ -7,9 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import com.example.cooklette.MainActivity
 import com.example.cooklette.R
 import com.example.cooklette.database.dao.RecipeDao
@@ -33,7 +37,22 @@ class IngredientFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+
+        // Inflate the custom toolbar layout
+        val toolbar: Toolbar = view.findViewById(R.id.toolbar)
+        inflater.inflate(R.layout.toolbar_add, toolbar)
+
+        // Set the custom toolbar as the activity's toolbar
+        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        d("myinfo", "SETTING button back pressed")
+        toolbar.findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener{
+            Navigation.findNavController(view)
+                .navigate(R.id.action_ingredientFragment_to_savedFragment)
+            d("myinfo", "button back pressed")
+        }
+
+        return view
     }
 
     override fun onAttach(context: Context) {
@@ -44,10 +63,12 @@ class IngredientFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // new ingredient added
         binding.buttonAddIngredient.setOnClickListener {
             addIngredientRow()
         }
 
+        // saving recipe
         binding.buttonSave.setOnClickListener {
             val title: String = binding.getRecipyName.text.toString()
             val instruction: String = binding.getInstructions.text.toString()
@@ -111,6 +132,7 @@ class IngredientFragment : Fragment() {
             rowBinding.getUnit.adapter = adapter
         }
 
+        // delete added ingredient
         rowBinding.buttonRemoveIngredient.setOnClickListener {
             binding.containerIngredients.removeView(rowBinding.root)
         }
