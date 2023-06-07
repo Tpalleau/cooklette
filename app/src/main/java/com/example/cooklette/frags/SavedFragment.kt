@@ -41,7 +41,7 @@ class SavedFragment : Fragment() {
         var data: List<RecipeWithIngredients>
         lifecycleScope.launch{
             data = dao.getAllRecipeWithIngredients()
-            val adapter = RecipeAdapter(data)
+            val adapter = RecipeAdapter(data, dao, lifecycleScope)
             recyclerView.adapter = adapter
         }
 

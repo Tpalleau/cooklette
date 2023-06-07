@@ -6,15 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.cooklette.database.RecipeDB
+import com.example.cooklette.database.dao.RecipeDao
 import com.example.cooklette.database.entity.Ingredient
 import com.example.cooklette.database.entity.RecipeWithIngredients
+import kotlinx.coroutines.launch
 
-class RecipeAdapter(private val items: List<RecipeWithIngredients>) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
+class RecipeAdapter(private var items: List<RecipeWithIngredients>, private var dao: RecipeDao, private val lifecycleScope: LifecycleCoroutineScope) : RecyclerView.Adapter<RecipeAdapter.RecipeViewHolder>() {
 
     private val isExpandedList: MutableList<Boolean> = MutableList(items.size) { false }
 
@@ -37,6 +42,9 @@ class RecipeAdapter(private val items: List<RecipeWithIngredients>) : RecyclerVi
         holder.ivExpandCollapse.setImageResource(if (isExpandedList[position]) R.drawable.ic_expand_less else R.drawable.ic_expand_more)
 
         holder.layoutRecipeName.setOnClickListener {
+
+
+
             isExpandedList[position] = !isExpandedList[position]
             holder.rvIngredients.visibility = if (isExpandedList[position]) View.VISIBLE else View.GONE
             holder.ivExpandCollapse.setImageResource(if (isExpandedList[position]) R.drawable.ic_expand_less else R.drawable.ic_expand_more)
@@ -45,6 +53,27 @@ class RecipeAdapter(private val items: List<RecipeWithIngredients>) : RecyclerVi
         holder.btnNavigate.setOnClickListener {
 
         }
+
+        // DELETE recipe
+        holder.btnImageDelete.setOnClickListener {
+            lifecycleScope.launch {
+                dao.deleteRecipeWithIngredientsById(recipe.recipe.id_recipe.toInt())
+                dao.deleteRecipeById(recipe.recipe.id_recipe.toInt())
+
+                val mutableItems = items.toMutableList()
+                mutableItems.removeAt(position)
+                items = mutableItems.toList()
+                notifyItemRemoved(position)
+            }
+        }
+
+
+
+        holder.btnImageEdit.setOnClickListener{
+
+        }
+
+
     }
 
     override fun getItemCount(): Int {
@@ -58,6 +87,8 @@ class RecipeAdapter(private val items: List<RecipeWithIngredients>) : RecyclerVi
         val layoutRecipeName: LinearLayout = itemView.findViewById(R.id.layoutRecipeName)
         val rvIngredients: RecyclerView = itemView.findViewById(R.id.rvIngredients)
         val btnNavigate: Button = itemView.findViewById(R.id.btnSeeRecipe)
+        val btnImageDelete: ImageButton = itemView.findViewById(R.id.buttonImageDelete)
+        val btnImageEdit: ImageButton = itemView.findViewById(R.id.buttonImageEdit)
     }
 
     // RecyclerViewAdapter for the ingredients list

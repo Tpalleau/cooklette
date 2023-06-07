@@ -1,6 +1,7 @@
 package com.example.cooklette.database.dao
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -22,6 +23,9 @@ interface RecipeDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipe(recipe: Recipe): Long
 
+    @Query("DELETE FROM Recipe WHERE id_recipe = :id")
+    suspend fun deleteRecipeById(id: Int)
+
     // UNIT
     @Query("SELECT * FROM unit")
     suspend fun getAllUnits(): List<Unit>
@@ -32,12 +36,15 @@ interface RecipeDao {
     @Insert
     suspend fun insertUnit(unit: Unit)
 
-    //Recipe_Ingredient
+    //Ingredient
     @Query("SELECT * FROM Ingredient")
     suspend fun getAllIds(): Ingredient
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecipeIngredient(crossRef: Ingredient): Long
+
+    @Query("DELETE FROM Ingredient WHERE id_recipe= :id_recipe")
+    suspend fun deleteRecipeWithIngredientsById(id_recipe: Int)
 
     @Transaction
     @Query("SELECT * FROM Recipe WHERE id_recipe = :id_recipe")

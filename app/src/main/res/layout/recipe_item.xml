@@ -30,6 +30,23 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_expand_more" />
+
+        <ImageButton
+            android:id="@+id/buttonImageEdit"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:contentDescription="delete"
+            android:src="@drawable/ic_edit"
+            />
+
+        <ImageButton
+            android:id="@+id/buttonImageDelete"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:contentDescription="delete"
+            android:src="@drawable/ic_delete"
+            />
+
     </LinearLayout>
 
     <!-- Ingredients List -->
