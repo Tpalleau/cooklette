@@ -6,20 +6,20 @@
     app:startDestination="@id/savedFragment">
 
     <fragment
-        android:id="@+id/ingredientFragment"
-        android:name="com.example.cooklette.frags.IngredientFragment"
-        android:label="IngredientFragment" >
-        <action
-            android:id="@+id/action_ingredientFragment_to_savedFragment"
-            app:destination="@id/savedFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/savedFragment"
         android:name="com.example.cooklette.frags.SavedFragment"
         android:label="fragment_saved"
         tools:layout="@layout/fragment_saved" >
         <action
-            android:id="@+id/action_savedFragment_to_ingredientFragment"
-            app:destination="@id/ingredientFragment" />
+            android:id="@+id/action_savedFragment_to_addFragment"
+            app:destination="@id/addFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addFragment"
+        android:name="com.example.cooklette.frags.AddFragment"
+        android:label="AddFragment" >
+        <action
+            android:id="@+id/action_addFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
     </fragment>
 </navigation>
