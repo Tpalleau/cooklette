@@ -1,6 +1,5 @@
 package com.example.cooklette.frags
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,11 +12,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.cooklette.MainActivity
 import com.example.cooklette.R
 import com.example.cooklette.RecipeAdapter
 import com.example.cooklette.database.RecipeDB
-import com.example.cooklette.database.dao.RecipeDao
 import com.example.cooklette.database.entity.RecipeWithIngredients
 import kotlinx.coroutines.launch
 

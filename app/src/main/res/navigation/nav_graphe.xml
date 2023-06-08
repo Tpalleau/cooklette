@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_savedFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_savedFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -22,4 +25,17 @@
             android:id="@+id/action_addFragment_to_savedFragment"
             app:destination="@id/savedFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/recipeFragment"
+        android:name="com.example.cooklette.frags.RecipeFragment"
+        android:label="RecipeFragment" >
+
+        <action
+            android:id="@+id/action_recipeFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <argument android:name="recipeId"
+            app:argType="integer" />
+
+    </fragment>
+
 </navigation>
