@@ -15,7 +15,6 @@ import com.example.cooklette.R
 import com.example.cooklette.database.RecipeDB
 import com.example.cooklette.database.dao.RecipeDao
 import com.example.cooklette.database.entity.Ingredient
-import com.example.cooklette.database.entity.RecipeWithIngredients
 import kotlinx.coroutines.launch
 
 class RecipeFragment : Fragment() {
@@ -61,21 +60,23 @@ class RecipeFragment : Fragment() {
             view.findViewById<TextView>(R.id.instructionsTextView).text = recipeWithIngredients.recipe.instructions
             numberPicker.value = recipeWithIngredients.recipe.nb_people
 
+            var quantityMultiplier: Float = 1.0F
+
             // Set up RecyclerView for displaying ingredients
-            ingredientsAdapter = IngredientsAdapterView(recipeWithIngredients.ingredients, recipeWithIngredients.recipe.nb_people)
+            ingredientsAdapter = IngredientsAdapterView(recipeWithIngredients.ingredients, quantityMultiplier)
             view.findViewById<RecyclerView>(R.id.ingredientsRecyclerView).layoutManager = LinearLayoutManager(requireContext())
             view.findViewById<RecyclerView>(R.id.ingredientsRecyclerView).adapter = ingredientsAdapter
 
             // Add listener to the NumberPicker
             numberPicker.setOnValueChangedListener { _, _, _ ->
-                ingredientsAdapter.nbPeople = numberPicker.value
+                ingredientsAdapter.quantityMultiplier = numberPicker.value/recipeWithIngredients.recipe.nb_people.toFloat()
                 ingredientsAdapter.notifyDataSetChanged() // Notify the adapter that data has changed
             }
         }
     }
 
     // RecyclerViewAdapter for the ingredients list
-    class IngredientsAdapterView(private val ingredients: List<Ingredient>, var nbPeople: Int) :
+    class IngredientsAdapterView(private val ingredients: List<Ingredient>, var quantityMultiplier: Float) :
         RecyclerView.Adapter<IngredientsAdapterView.IngredientViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
@@ -85,7 +86,7 @@ class RecipeFragment : Fragment() {
 
         override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
             val ingredient = ingredients[position]
-            holder.bind(ingredient, nbPeople)
+            holder.bind(ingredient, quantityMultiplier)
         }
 
         override fun getItemCount(): Int {
@@ -96,8 +97,8 @@ class RecipeFragment : Fragment() {
         inner class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             private val ingredientTextView: TextView = itemView.findViewById(R.id.ingredientName)
 
-            fun bind(ingredient: Ingredient, nbPeople: Int) {
-                val text = "${ingredient.ingredient}  ${ingredient.quantity * nbPeople}${ingredient.unit}"
+            fun bind(ingredient: Ingredient, quantityMultiplier: Float) {
+                val text = "${ingredient.ingredient}  ${ingredient.quantity * quantityMultiplier}${ingredient.unit}"
                 ingredientTextView.text = text
             }
         }
