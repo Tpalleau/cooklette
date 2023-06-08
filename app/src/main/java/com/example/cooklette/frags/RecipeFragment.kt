@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -21,6 +22,7 @@ class RecipeFragment : Fragment() {
 
     private lateinit var dao: RecipeDao
     private lateinit var ingredientsAdapter: IngredientsAdapterView
+    private lateinit var numberPicker: NumberPicker
 
     companion object {
         fun newInstance(recipeId: Int): RecipeFragment {
@@ -46,24 +48,34 @@ class RecipeFragment : Fragment() {
 
         val recipeId = requireArguments().getInt("recipeId")
 
+        numberPicker = view.findViewById(R.id.numberPicker)
+        numberPicker.minValue = 1
+        numberPicker.maxValue = 9
+
         // Fetch the RecipeWithIngredients object from your Room database based on the recipeId
         lifecycleScope.launch {
             val recipeWithIngredients = dao.getRecipeWithIngredients(recipeId)
 
             // Set the recipe details to corresponding views
             view.findViewById<TextView>(R.id.recipeTitleTextView).text = recipeWithIngredients.recipe.name
-            view.findViewById<TextView>(R.id.numberOfPeopleTextView).text = recipeWithIngredients.recipe.nb_people.toString()
             view.findViewById<TextView>(R.id.instructionsTextView).text = recipeWithIngredients.recipe.instructions
+            numberPicker.value = recipeWithIngredients.recipe.nb_people
 
             // Set up RecyclerView for displaying ingredients
-            ingredientsAdapter = IngredientsAdapterView(recipeWithIngredients.ingredients)
+            ingredientsAdapter = IngredientsAdapterView(recipeWithIngredients.ingredients, recipeWithIngredients.recipe.nb_people)
             view.findViewById<RecyclerView>(R.id.ingredientsRecyclerView).layoutManager = LinearLayoutManager(requireContext())
             view.findViewById<RecyclerView>(R.id.ingredientsRecyclerView).adapter = ingredientsAdapter
+
+            // Add listener to the NumberPicker
+            numberPicker.setOnValueChangedListener { _, _, _ ->
+                ingredientsAdapter.nbPeople = numberPicker.value
+                ingredientsAdapter.notifyDataSetChanged() // Notify the adapter that data has changed
+            }
         }
     }
 
     // RecyclerViewAdapter for the ingredients list
-    class IngredientsAdapterView(private val ingredients: List<Ingredient>) :
+    class IngredientsAdapterView(private val ingredients: List<Ingredient>, var nbPeople: Int) :
         RecyclerView.Adapter<IngredientsAdapterView.IngredientViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IngredientViewHolder {
@@ -73,7 +85,7 @@ class RecipeFragment : Fragment() {
 
         override fun onBindViewHolder(holder: IngredientViewHolder, position: Int) {
             val ingredient = ingredients[position]
-            holder.bind(ingredient)
+            holder.bind(ingredient, nbPeople)
         }
 
         override fun getItemCount(): Int {
@@ -84,9 +96,11 @@ class RecipeFragment : Fragment() {
         inner class IngredientViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             private val ingredientTextView: TextView = itemView.findViewById(R.id.ingredientName)
 
-            fun bind(ingredient: Ingredient) {
-                ingredientTextView.text = ingredient.ingredient
+            fun bind(ingredient: Ingredient, nbPeople: Int) {
+                val text = "${ingredient.ingredient}  ${ingredient.quantity * nbPeople}${ingredient.unit}"
+                ingredientTextView.text = text
             }
         }
     }
 }
+
