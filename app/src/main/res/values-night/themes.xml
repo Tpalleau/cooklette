@@ -2,15 +2,27 @@
     <!-- Base application theme. -->
     <style name="Theme.Cooklette" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
+        <!--<item name="colorPrimary">@color/purple_200</item>-->
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
+        <!--<item name="colorSecondary">@color/teal_200</item>-->
         <item name="colorSecondaryVariant">@color/teal_200</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+
+        <!-- Customize the primary color -->
+        <item name="colorPrimary">#FF5722</item>
+        <!-- Customize the secondary color -->
+        <item name="colorSecondary">#FFC107</item>
+        <!-- Customize the background color -->
+        <item name="android:windowBackground">#333333</item>
+        <!-- Customize the text color -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!-- Customize other attributes as needed -->
+
     </style>
 </resources>

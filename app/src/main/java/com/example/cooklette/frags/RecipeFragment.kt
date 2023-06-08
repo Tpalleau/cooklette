@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.NumberPicker
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cooklette.R
@@ -73,6 +75,11 @@ class RecipeFragment : Fragment() {
                 ingredientsAdapter.notifyDataSetChanged() // Notify the adapter that data has changed
             }
         }
+
+        view.findViewById<ImageButton>(R.id.imageButtonBack).setOnClickListener{
+            Navigation.findNavController(view)
+                .navigate(R.id.action_recipeFragment_to_savedFragment)
+        }
     }
 
     // RecyclerViewAdapter for the ingredients list
@@ -98,7 +105,7 @@ class RecipeFragment : Fragment() {
             private val ingredientTextView: TextView = itemView.findViewById(R.id.ingredientName)
 
             fun bind(ingredient: Ingredient, quantityMultiplier: Float) {
-                val text = "${ingredient.ingredient}  ${ingredient.quantity * quantityMultiplier}${ingredient.unit}"
+                val text = "${ingredient.ingredient}  ${ingredient.quantity * quantityMultiplier} ${ingredient.unit}"
                 ingredientTextView.text = text
             }
         }
