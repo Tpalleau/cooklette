@@ -123,7 +123,15 @@ class AddFragment : Fragment() {
                 Toast.makeText(context, "Recipe Added", Toast.LENGTH_SHORT).show()
 
                 lifecycleScope.launch {
-                    val idRecipe: Long = dao.insertRecipe(Recipe(name = title, instructions = instruction, nb_people = nb_people.toInt()))
+                    val idRecipe: Long
+                    if (args.recipeId != -1) {
+                        // Update existing recipe
+                        idRecipe = args.recipeId.toLong()
+                        dao.insertRecipe(Recipe(idRecipe, title, instruction, nb_people.toInt()))
+                    } else {
+                        // Insert new recipe
+                        idRecipe = dao.insertRecipe(Recipe(name = title, instructions = instruction, nb_people = nb_people.toInt()))
+                    }
 
                     d("MyInfo", "ingredientList $ingredientList, ${ingredientList.size}")
                     for (i: Int in 0 until ingredientList.size) {
