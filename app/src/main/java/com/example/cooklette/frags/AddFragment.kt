@@ -8,12 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.example.cooklette.MainActivity
 import com.example.cooklette.R
 import com.example.cooklette.database.dao.RecipeDao
@@ -28,6 +30,7 @@ class AddFragment : Fragment() {
     private var _binding: FragmentAddBinding? = null
     private val binding get() = _binding!!
     private lateinit var dao: RecipeDao
+    private val args: AddFragmentArgs by navArgs()
 
     private val ingredientList = mutableListOf<Triple<String, Long, String>>()
     private val rowBindings = mutableListOf<IngredientRowBinding>()
@@ -63,45 +66,67 @@ class AddFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // new ingredient added
+        val recipeId = args.recipeId
+        if (recipeId != -1) {
+            lifecycleScope.launch {
+                val recipeWithIngredients = dao.getRecipeWithIngredients(recipeId)
+                if (recipeWithIngredients != null) {
+                    binding.getRecipyName.setText(recipeWithIngredients.recipe.name)
+                    binding.getInstructions.setText(recipeWithIngredients.recipe.instructions)
+                    binding.getNbPeople.setText(recipeWithIngredients.recipe.nb_people.toString())
+
+                    binding.containerIngredients.removeAllViews()
+                    rowBindings.clear()
+
+                    recipeWithIngredients.ingredients.forEach { ingredient ->
+                        addIngredientRow().apply {
+                            getIngredientName.setText(ingredient.ingredient)
+                            getIngredientQuantity.setText(ingredient.quantity.toString())
+
+                            val unitPosition = getIndex(getUnit, ingredient.unit)
+                            getUnit.setSelection(unitPosition)
+                        }
+                    }
+                }
+            }
+        }
+
         binding.buttonAddIngredient.setOnClickListener {
             addIngredientRow()
         }
 
-        // saving recipe
         binding.buttonSave.setOnClickListener {
             val title: String = binding.getRecipyName.text.toString()
             val instruction: String = binding.getInstructions.text.toString()
             val nb_people: String = binding.getNbPeople.text.toString()
             d("nb_value", "val $nb_people")
 
-            rowBindings.forEach{
-                // add values in each row to Triple List
-                ingredientList.add(Triple(
-                    it.getIngredientName.text.toString(),
-                    it.getIngredientQuantity.text.toString().toLong(),
-                    it.getUnit.selectedItem as String))
+            rowBindings.forEach {
+                ingredientList.add(
+                    Triple(
+                        it.getIngredientName.text.toString(),
+                        it.getIngredientQuantity.text.toString().toLong(),
+                        it.getUnit.selectedItem as String
+                    )
+                )
             }
 
             if (title == "") {
                 Toast.makeText(context, "Missing Title", Toast.LENGTH_SHORT).show()
-            }else if (nb_people == "") {
+            } else if (nb_people == "") {
                 Toast.makeText(context, "Missing number of people", Toast.LENGTH_SHORT).show()
-            }else if (ingredientList.isEmpty()) {
-            Toast.makeText(context, "No Ingredients Added", Toast.LENGTH_SHORT).show()
+            } else if (ingredientList.isEmpty()) {
+                Toast.makeText(context, "No Ingredients Added", Toast.LENGTH_SHORT).show()
             } else if (instruction == "") {
                 Toast.makeText(context, "Missing Recipe Instructions", Toast.LENGTH_SHORT).show()
-            }else {
+            } else {
                 Toast.makeText(context, "Recipe Added", Toast.LENGTH_SHORT).show()
 
-
-
-                // add values to db
-                lifecycleScope.launch{
-                    val idRecipe:Long = dao.insertRecipe(Recipe(name = title, instructions = instruction, nb_people = nb_people.toInt()))
+                lifecycleScope.launch {
+                    val idRecipe: Long = dao.insertRecipe(Recipe(name = title, instructions = instruction, nb_people = nb_people.toInt()))
 
                     d("MyInfo", "ingredientList $ingredientList, ${ingredientList.size}")
-                    for (i: Int in 0 until ingredientList.size){
+                    for (i: Int in 0 until ingredientList.size) {
                         dao.insertRecipeIngredient(
                             Ingredient(
                                 id_recipe = idRecipe,
@@ -112,13 +137,12 @@ class AddFragment : Fragment() {
                         )
                     }
                     ingredientList.clear()
-
                 }
             }
         }
     }
 
-    private fun addIngredientRow() {
+    private fun addIngredientRow(): IngredientRowBinding {
         val rowBinding = IngredientRowBinding.inflate(layoutInflater, binding.containerIngredients, true)
         rowBindings.add(rowBinding)
 
@@ -132,10 +156,20 @@ class AddFragment : Fragment() {
             rowBinding.getUnit.adapter = adapter
         }
 
-        // delete added ingredient
         rowBinding.buttonRemoveIngredient.setOnClickListener {
             binding.containerIngredients.removeView(rowBinding.root)
         }
+
+        return rowBinding
+    }
+
+    private fun getIndex(spinner: Spinner, myString: String): Int {
+        for (i in 0 until spinner.count) {
+            if (spinner.getItemAtPosition(i).toString().equals(myString, ignoreCase = true)) {
+                return i
+            }
+        }
+        return 0
     }
 
 

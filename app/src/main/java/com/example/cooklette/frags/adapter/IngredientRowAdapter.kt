@@ -68,7 +68,9 @@ class RecipeAdapter(private var items: List<RecipeWithIngredients>, private var 
         }
 
         holder.btnImageEdit.setOnClickListener{
-
+            val action = SavedFragmentDirections.actionSavedFragmentToAddFragment()
+            action.recipeId = recipe.recipe.id_recipe.toInt()
+            Navigation.findNavController(it).navigate(action)
         }
     }
 
