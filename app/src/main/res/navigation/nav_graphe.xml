@@ -3,43 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/mainFragment">
+    app:startDestination="@id/savedFragment">
 
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.cooklette.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main">
+        android:id="@+id/savedFragment"
+        android:name="com.example.cooklette.frags.SavedFragment"
+        android:label="fragment_saved"
+        tools:layout="@layout/fragment_saved" >
         <action
-            android:id="@+id/action_mainFragment_to_AFragment"
-            app:destination="@id/fragment_a" />
+            android:id="@+id/action_savedFragment_to_addFragment"
+            app:destination="@id/addFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_ingredientFragment"
-            app:destination="@id/ingredientFragment" />
-        <action
-            android:id="@+id/action_mainFragment_to_fragment_b"
-            app:destination="@id/fragment_b" />
+            android:id="@+id/action_savedFragment_to_recipeFragment"
+            app:destination="@id/recipeFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_a"
-        android:name="com.example.cooklette.AFragment"
-        android:label="fragment_a"
-        tools:layout="@layout/fragment_a">
+        android:id="@+id/addFragment"
+        android:name="com.example.cooklette.frags.AddFragment"
+        android:label="AddFragment" >
         <action
-            android:id="@+id/action_AFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_addFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <argument
+            android:name="recipe_id"
+            app:argType="integer"
+            android:defaultValue="-1"/>
     </fragment>
     <fragment
-        android:id="@+id/fragment_b"
-        android:name="com.example.cooklette.BFragment"
-        android:label="fragment_b"
-        tools:layout="@layout/fragment_b">
+        android:id="@+id/recipeFragment"
+        android:name="com.example.cooklette.frags.RecipeFragment"
+        android:label="RecipeFragment" >
+
         <action
-            android:id="@+id/action_BFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            android:id="@+id/action_recipeFragment_to_savedFragment"
+            app:destination="@id/savedFragment" />
+        <argument android:name="recipeId"
+            app:argType="integer" />
+
     </fragment>
-    <fragment
-        android:id="@+id/ingredientFragment"
-        android:name="IngredientFragment"
-        android:label="IngredientFragment" />
+
 </navigation>
