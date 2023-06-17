@@ -1,28 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Cooklette" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <!--<item name="colorPrimary">@color/purple_200</item>-->
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <!--<item name="colorSecondary">@color/teal_200</item>-->
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
+    <style name="Theme.Cooklette.Dark" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize the primary color to a deep blue -->
+        <item name="colorPrimary">#0D47A1</item>
+        <!-- Customize the secondary color to a bright cyan -->
+        <item name="colorSecondary">#00ACC1</item>
+        <!-- Customize the background color to a dark gray -->
+        <item name="android:windowBackground">#303030</item>
+        <!-- Customize the text color to a light gray -->
+        <item name="android:textColorPrimary">#DEDEDE</item>
 
 
-        <!-- Customize the primary color -->
-        <item name="colorPrimary">#FF5722</item>
-        <!-- Customize the secondary color -->
-        <item name="colorSecondary">#FFC107</item>
-        <!-- Customize the background color -->
-        <item name="android:windowBackground">#333333</item>
-        <!-- Customize the text color -->
-        <item name="android:textColorPrimary">#FFFFFF</item>
-        <!-- Customize other attributes as needed -->
-
+        <item name="colorPrimaryDark">#0F1E75</item>
+        <!-- Customize the accent color to a deep orange -->
+        <item name="colorAccent">#FF5722</item>
+        <!-- Customize the color of buttons to a cool blue -->
+        <item name="android:colorButtonNormal">#2196F3</item>
+        <!-- Customize the color of links to a bright green -->
+        <item name="android:textColorLink">#00E676</item>
+        <!-- Customize the color of checkboxes to a rich brown -->
+        <item name="colorControlNormal">#8D6E63</item>
     </style>
 </resources>

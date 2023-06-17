@@ -127,6 +127,8 @@ class AddFragment : Fragment() {
                     if (args.recipeId != -1) {
                         // Update existing recipe
                         idRecipe = args.recipeId.toLong()
+                        // clear old ingredients and recipe name
+                        dao.deleteRecipeWithIngredientsById(idRecipe.toInt())
                         dao.insertRecipe(Recipe(idRecipe, title, instruction, nb_people.toInt()))
                     } else {
                         // Insert new recipe
@@ -165,7 +167,10 @@ class AddFragment : Fragment() {
         }
 
         rowBinding.buttonRemoveIngredient.setOnClickListener {
+            // retirer element de la list
+            rowBindings.remove(rowBinding)
             binding.containerIngredients.removeView(rowBinding.root)
+
         }
 
         return rowBinding

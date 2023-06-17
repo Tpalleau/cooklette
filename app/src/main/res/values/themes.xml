@@ -1,29 +1,28 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Cooklette" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <!--<item name="colorPrimary">@color/purple_500</item> -->
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <!--<item name="colorSecondary">@color/teal_200</item> -->
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-
-
-
-        <!-- Customize the primary color -->
-        <item name="colorPrimary">#FF5722</item>
-        <!-- Customize the secondary color -->
-        <item name="colorSecondary">#FFC107</item>
-        <!-- Customize the background color -->
-        <item name="android:windowBackground">#F5F5F5</item>
-        <!-- Customize the text color -->
-        <item name="android:textColorPrimary">#333333</item>
+    <style name="Theme.Cooklette" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize the primary color to a warm, earthy tone -->
+        <item name="colorPrimary">#FF8C00</item>
+        <!-- Customize the secondary color to a fresh green -->
+        <item name="colorSecondary">#00BFA5</item>
+        <!-- Customize the background color to a light beige -->
+        <item name="android:windowBackground">#FFE0B2</item>
+        <!-- Customize the text color to a deep brown -->
+        <item name="android:textColorPrimary">#4B3621</item>
         <!-- Customize other attributes as needed -->
 
         <!-- Customize your theme here. -->
+
+        <!-- Add cooking-related attributes -->
+        <!-- Customize the action bar color to a vibrant red -->
+        <item name="colorPrimaryDark">#D32F2F</item>
+        <!-- Customize the accent color to a sunny yellow -->
+        <item name="colorAccent">#FFEB3B</item>
+        <!-- Customize the color of buttons to a lively orange -->
+        <item name="android:colorButtonNormal">#FF5722</item>
+        <!-- Customize the color of links to a vibrant green -->
+        <item name="android:textColorLink">#4CAF50</item>
+        <!-- Customize the color of checkboxes to a tasty brown -->
+        <item name="colorControlNormal">#795548</item>
     </style>
 </resources>

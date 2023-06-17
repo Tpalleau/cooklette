@@ -1,5 +1,6 @@
 package com.example.cooklette
 
+import android.content.res.Configuration
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log.d
@@ -15,6 +16,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // Check if the system is in dark mode
+        if (resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK == Configuration.UI_MODE_NIGHT_YES) {
+            setTheme(R.style.Theme_Cooklette_Dark)
+        }
+
 
         dao = RecipeDB.getInstance(this).recipeDao
 
