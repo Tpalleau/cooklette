@@ -147,6 +147,8 @@ class AddFragment : Fragment() {
                         )
                     }
                     ingredientList.clear()
+
+                    Navigation.findNavController(view).navigate(R.id.action_addFragment_to_savedFragment)
                 }
             }
         }

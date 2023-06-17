@@ -12,10 +12,12 @@
         tools:layout="@layout/fragment_saved" >
         <action
             android:id="@+id/action_savedFragment_to_addFragment"
-            app:destination="@id/addFragment" />
+            app:destination="@id/addFragment"
+            app:enterAnim="@anim/slide_in"/>
         <action
             android:id="@+id/action_savedFragment_to_recipeFragment"
-            app:destination="@id/recipeFragment" />
+            app:destination="@id/recipeFragment"
+            app:enterAnim="@anim/slide_in" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
@@ -23,7 +25,8 @@
         android:label="AddFragment" >
         <action
             android:id="@+id/action_addFragment_to_savedFragment"
-            app:destination="@id/savedFragment" />
+            app:destination="@id/savedFragment"
+            app:exitAnim="@anim/slide_out"/>
         <argument
             android:name="recipe_id"
             app:argType="integer"
@@ -36,7 +39,8 @@
 
         <action
             android:id="@+id/action_recipeFragment_to_savedFragment"
-            app:destination="@id/savedFragment" />
+            app:destination="@id/savedFragment"
+            app:exitAnim="@anim/slide_out"/>
         <argument android:name="recipeId"
             app:argType="integer" />
 
